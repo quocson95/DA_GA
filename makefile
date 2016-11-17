@@ -10,13 +10,15 @@ GALIB_VER=247
 TMPDIR=/var/tmp
 RELDIR=$(TMPDIR)/galib$(GALIB_VER)
 
-all: lib ex
+all: lib ex qs
 
 lib:
 	cd ga; $(MAKE)
 
 ex:
 	cd examples; $(MAKE)
+qs:
+	cd QS;$(MAKE)
 
 test: lib ex
 	cd examples; $(MAKE) test

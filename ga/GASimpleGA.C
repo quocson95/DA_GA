@@ -9,7 +9,7 @@
 ---------------------------------------------------------------------------- */
 #include <ga/GASimpleGA.h>
 #include <ga/garandom.h>
-
+#include <omp.h>
 
 GAParameterList&
 GASimpleGA::registerDefaultParameters(GAParameterList& p) {
@@ -175,7 +175,8 @@ GASimpleGA::step()
 
 // Generate the individuals in the temporary population from individuals in 
 // the main population.
-
+#pragma omp parallel 
+  #pragma omp for
   for(i=0; i<pop->size()-1; i+=2){	// takes care of odd population
     mom = &(oldPop->select());  
     dad = &(oldPop->select());
