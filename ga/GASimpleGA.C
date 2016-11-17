@@ -175,7 +175,7 @@ GASimpleGA::step()
 
 // Generate the individuals in the temporary population from individuals in 
 // the main population.
-#pragma omp parallel 
+#pragma omp parallel {
   #pragma omp for
   for(i=0; i<pop->size()-1; i+=2){	// takes care of odd population
     mom = &(oldPop->select());  
@@ -199,6 +199,7 @@ GASimpleGA::step()
 
     stats.numeval += c1 + c2;
   }
+}//End parallel
   if(pop->size() % 2 != 0){	// do the remaining population member
     mom = &(oldPop->select());  
     dad = &(oldPop->select());
